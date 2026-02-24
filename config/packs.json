@@ -1,0 +1,12 @@
+{
+  "pack_format": 15,
+  "description": "Misc Localization Packs — 综合本地化资源包",
+  "minecraft_version": "1.20.1",
+  "packs": [
+    {
+      "slug": "ae2-1.20.1-guide-zh_cn",
+      "name": "AE2 指南中文翻译",
+      "description": "Applied Energistics 2 指南书简体中文翻译"
+    }
+  ]
+}

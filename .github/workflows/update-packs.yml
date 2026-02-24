@@ -1,0 +1,85 @@
+name: Update Localization Packs
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:         # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run merge script
+        id: merge
+        run: |
+          python scripts/merge_packs.py
+          echo "updated=true" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Check for updates
+        id: check
+        run: |
+          if git diff --quiet; then
+            echo "No changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: update localization packs [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          git push
+
+      - name: Build release zip
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          # Create the resource pack zip
+          ZIP_NAME="misc-localization-packs.zip"
+          # Include assets/ and pack.mcmeta (and pack.png if it exists)
+          FILES_TO_ZIP="assets pack.mcmeta"
+          if [ -f "pack.png" ]; then
+            FILES_TO_ZIP="$FILES_TO_ZIP pack.png"
+          fi
+          zip -r "$ZIP_NAME" $FILES_TO_ZIP
+          echo "zip_name=$ZIP_NAME" >> $GITHUB_ENV
+
+          # Generate a version tag based on date
+          VERSION_TAG="v$(date -u '+%Y%m%d-%H%M%S')"
+          echo "version_tag=$VERSION_TAG" >> $GITHUB_ENV
+
+      - name: Create Release
+        if: steps.check.outputs.has_changes == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.version_tag }}
+          name: "Localization Packs ${{ env.version_tag }}"
+          body: |
+            自动更新本地化资源包。
+
+            ## 更新内容
+            请查看 [README.md](../../blob/main/README.md) 获取完整的资源包列表及版本信息。
+
+            ## 使用方式
+            1. 下载 `misc-localization-packs.zip`
+            2. 放入 Minecraft 的 `resourcepacks` 文件夹
+            3. 在游戏内启用资源包
+          files: ${{ env.zip_name }}
+          generate_release_notes: false
