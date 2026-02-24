@@ -2,7 +2,7 @@ name: Update Localization Packs
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Every 6 hours
+    - cron: '5 4 */1 * *'  # Every day at 4:05 AM
   workflow_dispatch:         # Manual trigger
 
 permissions:
