@@ -4,14 +4,14 @@
 
 **目标 Minecraft 版本**: 1.20.1
 **Pack Format**: 15
-**最后更新**: 2026-04-26 05:09 UTC
+**最后更新**: 2026-04-27 05:14 UTC
 
 ## 📦 包含的资源包
 
 | 资源包 | 说明 | 版本 | 发布日期 | Modrinth 链接 |
 | --- | --- | --- | --- | --- |
 | AE2 指南中文翻译 | Applied Energistics 2 指南书简体中文翻译 | 2.0 | 2025-05-10 | [链接](https://modrinth.com/resourcepack/ae2-1.20.1-guide-zh_cn) |
-| Explorer's Compass structure Translation | 探险者(探险家)指南针结构汉化材质包，可以让你的旅途更加愉快₍˄·͈༝·͈˄*₎◞ ̑̑ | v3.0hf | 2026-04-15 | [链接](https://modrinth.com/resourcepack/ecst) |
+| Explorer's Compass structure Translation | 探险者(探险家)指南针结构汉化材质包，可以让你的旅途更加愉快₍˄·͈༝·͈˄*₎◞ ̑̑ | v3.1 | 2026-04-26 | [链接](https://modrinth.com/resourcepack/ecst) |
 
 ## 🚀 使用方式
 
@@ -42,4 +42,4 @@
 
 ---
 
-*本文件由 [merge_packs.py](scripts/merge_packs.py) 自动生成，最后更新于 2026-04-26 05:09 UTC*
+*本文件由 [merge_packs.py](scripts/merge_packs.py) 自动生成，最后更新于 2026-04-27 05:14 UTC*
