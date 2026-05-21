@@ -4,7 +4,7 @@
 
 **目标 Minecraft 版本**: 1.20.1
 **Pack Format**: 15
-**最后更新**: 2026-05-20 05:31 UTC
+**最后更新**: 2026-05-21 05:35 UTC
 
 ## 📦 包含的资源包
 
@@ -42,4 +42,4 @@
 
 ---
 
-*本文件由 [merge_packs.py](scripts/merge_packs.py) 自动生成，最后更新于 2026-05-20 05:31 UTC*
+*本文件由 [merge_packs.py](scripts/merge_packs.py) 自动生成，最后更新于 2026-05-21 05:35 UTC*
